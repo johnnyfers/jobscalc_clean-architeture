@@ -1,8 +1,8 @@
-const Job = require('../model/Job')
-const JobUtils = require('../utils/JobUtils')
-const Profile = require('../model/Profile')
+import { JobUtils } from 'src/shared/utils/JobUtils';
+import { Job } from '../model/Job';
+import { Profile } from '../model/Profile';
 
-module.exports = {
+export const JobController = {
     create(req, res) {
       return res.render("job")
     },
@@ -10,8 +10,8 @@ module.exports = {
     async save(req, res) {
       await Job.create({
         name: req.body.name,
-        "daily-hours": req.body["daily-hours"], 
-        "total-hours": req.body["total-hours"], 
+        "daily_hours": req.body["daily_hours"], 
+        "total_hours": req.body["total_hours"], 
         created_at: Date.now()
       });     
 
@@ -22,7 +22,7 @@ module.exports = {
       const jobId = req.params.id
       const jobs = await Job.get()
 
-      const job = jobs.find(job => Number(job.id) === Number(jobId))
+      const job: any = jobs.find(job => Number(job.id) === Number(jobId))
 
       if (!job) {
         return res.send('Job not found!')
@@ -30,7 +30,7 @@ module.exports = {
 
       const profile = await Profile.get()
 
-      job.budget = JobUtils.calculateBudget(job, profile["value-hour"])
+      job.budget = JobUtils.calculateBudget(job, profile["value_hour"])
 
       return res.render("job-edit", { job })
     },
@@ -40,8 +40,8 @@ module.exports = {
 
       const updatedJob = {
         name: req.body.name,
-        "total-hours": req.body["total-hours"], 
-        "daily-hours": req.body["daily-hours"], 
+        "total_hours": req.body["total_hours"], 
+        "daily_hours": req.body["daily_hours"], 
       }      
 
       await Job.update(updatedJob, jobId)
