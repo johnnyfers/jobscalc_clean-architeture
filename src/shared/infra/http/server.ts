@@ -1,3 +1,5 @@
+import "reflect-metadata"
+import '../../container'
 import express from 'express'
 import { routes } from "./routes"
 import path from "path"
