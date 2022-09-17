@@ -7,7 +7,7 @@ export class JobEntity {
         public name: string,
         public daily_hours: number,
         public total_hours: number,
-        public created_at: Date,
+        public created_at: number,
         public id?: number
     ) {
         this.name = name;
