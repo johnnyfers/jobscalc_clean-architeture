@@ -8,7 +8,8 @@ const server = express()
 server.set('view engine', 'ejs')
 
 // Mudar a localização da pasta views
-server.set('views', path.join(__dirname, 'views'))
+const viewsPath= 'src/app/presentation/views'
+server.set('views', path.join(viewsPath))
 
 //habilitar arquivos statics
 server.use(express.static("public"))

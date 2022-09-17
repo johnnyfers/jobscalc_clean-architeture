@@ -13,7 +13,6 @@ export const ProfileController = {
       const monthlyTotalHours = weekTotalHours * weeksPerMonth
 
       const valueHour = data["monthly_budget"] / monthlyTotalHours
-
       const profile = await Profile.get()
 
       await Profile.update({

@@ -5,7 +5,7 @@
   "main": "src/server.js",
   "scripts": {
     "dev": "ts-node-dev -r tsconfig-paths/register --inspect --transpile-only --ignore-watch node_modules src/shared/infra/http/server.ts",
-    "init-db": "node src/db/init.js"
+    "init-db": "ts-node-dev src/shared/infra/database/sqlite/init.ts"
   },
   "keywords": [],
   "author": "",
