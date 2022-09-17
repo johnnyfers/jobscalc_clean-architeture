@@ -4,7 +4,7 @@ import { JobEntity } from "src/domain/entities/JobEntity";
 import { IJobRepository } from "src/domain/repositories/IJobRepository";
 import { Database } from "../database/sqlite/config";
 
-export class JobReposirotyDatabase implements IJobRepository {
+export class JobRepositoryDatabase implements IJobRepository {
     private database: SQLite<sqlite3.Database, sqlite3.Statement>
 
     async create(newJob: JobEntity): Promise<void> {

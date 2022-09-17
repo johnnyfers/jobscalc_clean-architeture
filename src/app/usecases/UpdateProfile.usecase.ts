@@ -1,3 +1,4 @@
+import { inject, injectable } from "tsyringe";
 import { IProfileRepository } from "src/domain/repositories/IProfileRepository";
 
 type UpdateProfilePayload = {
@@ -9,10 +10,14 @@ type UpdateProfilePayload = {
     vacation_per_year: number;
 }
 
+@injectable()
 export class UpdateProfileUseCase {
     constructor(
+        @inject('ProfileRepository')
         private readonly profileRepository: IProfileRepository
-    ) { }
+    ) {
+        this.profileRepository = profileRepository;
+    }
 
     async execute(payload: UpdateProfilePayload): Promise<void> {
         const profile = await this.profileRepository.get()

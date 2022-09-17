@@ -1,3 +1,4 @@
+import { inject, injectable } from "tsyringe";
 import { IJobRepository } from "src/domain/repositories/IJobRepository";
 
 type UpdateJobPayload = {
@@ -6,10 +7,14 @@ type UpdateJobPayload = {
     daily_hours: number;
 }
 
+@injectable()
 export class UpdateJobUseCase {
     constructor(
+        @inject('JobRepository')
         private readonly jobRepository: IJobRepository
-    ) {}
+    ) {
+        this.jobRepository = jobRepository;
+    }
 
     async execute(payload: UpdateJobPayload,jobId: number): Promise<void> {
        const job = await this.jobRepository.show(jobId)
