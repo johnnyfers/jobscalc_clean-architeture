@@ -11,8 +11,6 @@ export class DashboardIndexUseCase {
     async execute(): Promise<DashboardEntity> {
         const profile = await this.profileRepository.get()
         const jobs = await this.jobRepository.get()
-        profile.updateValueHour()
-
         const dashboard = new DashboardEntity(profile, jobs)
         dashboard.updateJobs()
         dashboard.updateFreeHours()

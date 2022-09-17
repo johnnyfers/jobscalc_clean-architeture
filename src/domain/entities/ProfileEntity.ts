@@ -1,5 +1,4 @@
 export class ProfileEntity {
-    public value_hour: number
 
     constructor(
         public name: string,
@@ -8,6 +7,7 @@ export class ProfileEntity {
         public days_per_week: number,
         public hours_per_day: number,
         public vacation_per_year: number,
+        public value_hour: number,
         public id?: number
     ) { 
         this.name = name;

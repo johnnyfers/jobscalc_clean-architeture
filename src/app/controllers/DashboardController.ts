@@ -21,9 +21,9 @@ export const DashboardController = {
       profile.monthly_budget,
       profile.days_per_week,
       profile.hours_per_day,
-      profile.vacation_per_year
+      profile.vacation_per_year,
+      profile.value_hour
     )
-    profileEntity.updateValueHour()
 
     const dashboardEntity = new DashboardEntity(profileEntity, jobsEntity)
     dashboardEntity.updateJobs()
