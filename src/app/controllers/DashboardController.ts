@@ -1,39 +1,18 @@
-import { DashboardEntity } from "src/domain/entities/DashboardEntity";
-import { JobEntity } from "src/domain/entities/JobEntity";
-import { ProfileEntity } from "src/domain/entities/ProfileEntity";
-import { Job } from "../model/Job";
-import { Profile } from "../model/Profile";
+import { Request, Response } from "express"
+import { container } from 'tsyringe'
+import { DashboardIndexUseCase } from "../usecases/DashboardIndex.usecase";
 
-export const DashboardController = {
-  async index(req, res) {
-    const jobs = await Job.get();
-    const jobsEntity = jobs.map((job) => new JobEntity(
-      job.name,
-      job.daily_hours,
-      job.total_hours,
-      job.created_at,
-      job.id
-    ))
-    const profile = await Profile.get();
-    const profileEntity = new ProfileEntity(
-      profile.name,
-      profile.avatar,
-      profile.monthly_budget,
-      profile.days_per_week,
-      profile.hours_per_day,
-      profile.vacation_per_year,
-      profile.value_hour
-    )
+export class DashboardController {
 
-    const dashboardEntity = new DashboardEntity(profileEntity, jobsEntity)
-    dashboardEntity.updateJobs()
-    dashboardEntity.updateFreeHours()
+  async index(_req: Request, res: Response): Promise<void> {
+    const usecase: DashboardIndexUseCase = container.resolve(DashboardIndexUseCase)
+    const dashboardEntity = await usecase.execute()
 
     return res.render("index", {
-       jobs: dashboardEntity.jobs, 
-       profile: dashboardEntity.profile,
-        statusCount: dashboardEntity.statusCount, 
-        freeHours: dashboardEntity.freeHours 
-      });
-  },
+      jobs: dashboardEntity.jobs,
+      profile: dashboardEntity.profile,
+      statusCount: dashboardEntity.statusCount,
+      freeHours: dashboardEntity.freeHours
+    })
+  }
 };

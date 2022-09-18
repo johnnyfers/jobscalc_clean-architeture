@@ -26,7 +26,7 @@ export class ProfileRepositoryDatabase implements IProfileRepository {
 
     async update(profile: ProfileEntity): Promise<void> {
         this.database = await Database()
-        this.database.run(`UPDATE profile SET
+        await this.database.run(`UPDATE profile SET
         name = "${profile.name}",
         avatar = "${profile.avatar}",
         monthly_budget = ${profile.monthly_budget},
