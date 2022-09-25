@@ -7,6 +7,6 @@ export class SaveJobController {
         const usecase: SaveJobUseCase = container.resolve(SaveJobUseCase)
         await usecase.execute(req.body)
 
-        return res.redirect('/')
+        res.redirect('/')
     }
 }

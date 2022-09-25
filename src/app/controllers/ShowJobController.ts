@@ -9,6 +9,6 @@ export class ShowJobController {
         const job = await usecase.execute(+jobId)
         if (!job) return res.send('Job not found!')
           
-        return res.render("job-edit", { job })
+        res.render("job-edit", { job })
     }
 }

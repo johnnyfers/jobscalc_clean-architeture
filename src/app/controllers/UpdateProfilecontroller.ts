@@ -7,6 +7,6 @@ export class UpdateProfileController {
         const usecase: UpdateProfileUseCase = container.resolve(UpdateProfileUseCase)
         await usecase.execute(req.body)
 
-        return res.redirect('/profile')
+        res.redirect('/profile')
     }
 }

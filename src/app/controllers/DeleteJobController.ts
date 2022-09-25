@@ -3,11 +3,11 @@ import { container } from 'tsyringe'
 import { DeleteJobUseCase } from "../usecases/DeleteJob.usecase"
 
 export class DeleteJobController {
-    async delete(req: Request, res: Response): Promise<void | Response> {
+    async delete(req: Request, res: Response): Promise<void> {
         const jobId: string = req.params.id
         const usecase: DeleteJobUseCase = container.resolve(DeleteJobUseCase)
         await usecase.execute(+jobId)
 
-        return res.redirect('/')
+        res.redirect('/')
     }
 }

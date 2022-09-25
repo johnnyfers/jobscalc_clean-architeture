@@ -4,10 +4,10 @@ import { UpdateJobUseCase } from "../usecases/UpdateJob.usecase"
 
 export class UpdateJobController {
     async update(req: Request, res: Response): Promise<void> {
-        const jobId= req.params.id
+        const jobId: string= req.params.id
         const usecase: UpdateJobUseCase = container.resolve(UpdateJobUseCase)
         await usecase.execute(req.body, +jobId)
           
-        return res.redirect('/job/' + jobId)
+        res.redirect('/job/' + jobId)
     }
 }
